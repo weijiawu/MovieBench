@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="MovieBench: A Hierarchical Movie Level Dataset for Long Video Generation">
+  <meta property="og:title" content="MovieBench"/>
+  <meta property="og:description" content="Integrating Spatial Knitting Attentions to Embed High-Level and Fidelity-Rich Conditions in Diffusion Models"/>
+  <meta property="og:url" content="https://github.com/HelloVision/HelloMeme"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="MovieBench">
+  <meta name="twitter:description" content="Integrating Spatial Knitting Attentions to Embed High-Level and Fidelity-Rich Conditions in Diffusion Models">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="MovieBench">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>MovieBench</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+
+<head>
+  <style>
+      /* 定义表格样式 */
+      table {
+          margin: 0 auto; /* 将表格水平居中 */
+          border-collapse: collapse; /* 边框合并，可选 */
+      }
+      
+      /* 定义表格2样式 */
+      #table1 {
+          margin: 0 auto; /* 将表格2水平居中 */
+      }
+      /* 定义表格2的单元格样式 */
+      #table1 td {
+          width: 177px; /* 设置表格2的单元格宽度 */
+          text-align: center; /* 文本居中 */
+          border: 1px solid black; /* 边框样式，可选 */
+      }
+      
+      /* 定义表格2样式 */
+      #table2 {
+          margin: 0 auto; /* 将表格2水平居中 */
+      }
+      /* 定义表格2的单元格样式 */
+      #table2 td {
+          width: 250px; /* 设置表格2的单元格宽度 */
+          text-align: center; /* 文本居中 */
+          border: 1px solid black; /* 边框样式，可选 */
+      }
+
+      #table3 {
+          margin: 0 auto; 
+      }
+      #table3 td {
+          width: 250px; 
+          text-align: center; 
+          border: 1px solid black; 
+      }
+      
+  </style>
+</head>
+
+
+
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MovieBench: A Hierarchical Movie Level Dataset for Long Video Generation</h1>
+          <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://weijiawu.github.io/" target="_blank">Weijia Wu</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://mingyulau.github.io/" target="_blank">Mingyu Liu</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://zeyu-zhu.github.io/webpage/" target="_blank">Zeyu Zhu</a>
+              </span>,
+              <span class="author-block">
+                <a href="" target="_blank">Xi Xia</a>
+              </span>,
+              <span class="author-block">
+                <a href="" target="_blank">Haoen Feng</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://github.com/encounter1997" target="_blank">Wen Wang</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://qinghonglin.github.io/" target="_blank">Kevin Qinghong Lin</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://cshen.github.io/" target="_blank">Chunhua Shen</a>
+              </span>,
+              <span class="author-block">
+                <a href="https://sites.google.com/view/showlab" target="_blank">Mike Zheng Shou</a>
+              </span>
+                <span class="author-block">
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"> Show Lab, National University of Singapore | Zhejiang University </span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links"> 
+                      <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://github.com/showlab/MovieBecnh" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Technical Report</span>
+                      </a>
+                    </span> 
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/showlab/MovieBecnh" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span> 
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href=" " target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span> 
+                </a>
+              </span>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="title" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/title.mp4"
+        type="video/mp4">
+      </video>
+      <p class="content has-text-centered">
+        <strong>Script to Synchronized Movie with Audio Generation</strong>
+      </p>
+      <p class="content has-text-left">
+        <strong>Data</strong>: MovieBench(ours) with Movie Scripts, Character Bank (Character Names, Images, and Audio).
+        <strong>Text to StoryBoard Model</strong>: StoryDiffusion.
+        <strong>StoryBoard+Sutitles to Video Model</strong>: Klingai.
+        The audio-driven talking human generation model also uses Klingai, and in this demo, we have not customized the character's audio.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+
+<!-- download -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div>
+        <h2 class="title is-3">Dataset Download</h2>
+        <div class="content has-text-justified">
+          <p class="content has-text-left">
+            We are currently organizing the corresponding data and plan to release it within the next <strong>three months</strong>, along with establishing a leaderboard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Dataset -->
+
+
+<!-- Dataset -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div>
+        <h2 class="title is-3">Dataset</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/structure.png" alt="Network Structure"/>
+          <p class="content has-text-left">
+            <strong>MovieBench Dataset.</strong> MovieBench categorizes the movie annotations into three hierarchical data levels, representing different granularities of information: 1) Movie level provides a broad overview of the film; 2) Scene level provides mid-level scene consistency information; 3) Shot level emphasizes specific moments with detailed descriptions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Dataset -->
+
+<!-- Keyframe Generate -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Task 1: Text to Keyframe/Storyboard Generation</h2>
+      <div class="content has-text-justified">
+        <img src="static/images/keyframeGen.png" alt="Text to Keyframe/Storyboard Generation"/>
+        <p class="content has-text-left">
+          With the hierarchical data MovieBench provide, existing methods can partially reconstruct a coherent storyline, maintaining consistent character identities and relationships.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Keyframe Generate -->
+
+<!--  Task 2: Identity-Customized Long Video Generation -->
+<section class="section hero is-light" style="padding-top: 0; padding-bottom: 0;">
+    <div class="container is-max-desktop" style="margin-top: 0; margin-bottom: 0;">
+      <h2 class="title is-3" style="margin-top: 0;">Task 2: Identity-Customized Long Video Generation</h2>
+        <table class="center" id="table3">
+        <tr>
+            <td style="text-align:center;"><b>Character-based Plot</b></td>
+            <td style="text-align:center;"><b>Original Movie</b></td>
+            <td style="text-align:center;"><b>DreanVideo</b></td>
+            <td style="text-align:center;"><b>Magic-Me</b></td>
+        </tr>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry Potter</span> suddenly emerges from under a sheet in a dark room, pretending to be asleep.</b>
+          </td>
+          
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396_DreamVideo.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry Potter</span> is clearing the table while <span style="color:red;">Dudley</span> and <span style="color:red;">Aunt Petunia</span> are seated, enjoying a meal.</b>
+          </td>
+          <!-- <td></td><video poster="" id="video_expedit" controls muted loop height="100%">
+            <source src="static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.41.058-00.02.43.425.mp4" type="video/mp4" width="832" height="512"> 
+          </video></td> -->
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.41.058-00.02.43.425.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+        </td>
+          <!-- <td><mp4 src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.41.058-00.02.43.425.mp4" width="832" height="512"></td> -->
+          <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.41.058-00.02.43.425_dream.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.41.058-00.02.43.425.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry Potter</span> is walking through a dark suburban neighborhood at night.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.07.14.654-00.07.22.774.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/dream1054_Harry_Potter_and_the_prisoner_of_azkaban_00.07.14.654-00.07.22.774.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.07.14.654-00.07.22.774.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry Potter</span> is inside a bus, observing his surroundings. He looks upward, examining something above him.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.09.22.223-00.09.27.062.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/Dream_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.09.22.223-00.09.27.062.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.09.22.223-00.09.27.062.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry</span>, <span style="color:red;">Ron</span>, <span style="color:red;">Hermione</span>, and <span style="color:red;">Sirius</span> are in a train compartment. They are having a serious conversation, with Sirius providing guidance or insight to the younger trio.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.23.08.109-00.23.09.438.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/Dream_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.23.08.109-00.23.09.438.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.23.08.109-00.23.09.438.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b>Professor <span style="color:red;">Sybil Trelawney</span> is engaged in an animated discussion, gesturing dramatically. Her expressive behavior suggests a lively moment, possibly involving a prediction or revelation.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.30.49.069-00.30.50.599.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/Dream1054_Harry_Potter_and_the_prisoner_of_azkaban_00.30.49.069-00.30.50.599.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.30.49.069-00.30.50.599.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Harry</span> and <span style="color:red;">Hermione</span> stand in a snowy forest. Harry looks down miserably, conveying a sense of sadness or contemplation, while Hermione stands beside him, providing silent support.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_01.06.44.471-01.06.45.575.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/Dream_1054_Harry_Potter_and_the_prisoner_of_azkaban_01.06.44.471-01.06.45.575.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_01.06.44.471-01.06.45.575.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td style="text-align:left;">
+            <b><span style="color:red;">Hermione Granger</span> hides behind a tree in a dense forest, appearing tense and alert.</b>
+          </td>
+          <td>
+            <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_01.52.31.615-01.52.32.991.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/Dream_1054_Harry_Potter_and_the_prisoner_of_azkaban_01.52.31.615-01.52.32.991.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+          <td>
+            <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_01.52.31.615-01.52.32.991.mp4" width="832" height="512" autoplay muted loop>
+            </video>
+          </td>
+        </tr>
+        </table>
+    </div>
+</section>
+<!-- End Exp Edit -->
+
+<!--  Image-conditional Video Generation -->
+
+<!--  Talking Human with Audio Generation -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Paper video. -->
+      <h2 class="title is-3"> Task 3: Keyframe-conditioned Video Generation</h2>
+        <!-- <p>
+          The input conditions for the HMControlModule can be generated by a head model that has the <a href="https://arkit-face-blendshapes.com/" target="_blank">ARKit Face Blendshapes</a> bound to it. So we can use ARKit blendshape values to control the generation of facial expressions.
+        </p> -->
+        <!-- <div class="container"> -->
+          <table class="center" id="table2">
+          <tr>
+                <!-- <td style="text-align:center;"><b>Character-based Plot</b></td>
+            <td style="text-align:center;"><b>    Original Movie   </b></td> -->
+            <td style="text-align:center;">
+              <b> </b><br>
+              <b>Character-based Plot</b><br>
+              <b> </b>
+            </td>
+            <td style="text-align:center;">
+              <b> </b><br>
+              <b>Original Movie</b><br>
+              <b> </b>
+            </td>
+            <td style="text-align:center;">
+              <b>StoryDiffusion</b><br>
+              <b>+</b><br>
+              <b>CogVideoX (Open-Source)</b>
+            </td>
+            <td style="text-align:center;">
+              <b>StoryDiffusion</b><br>
+              <b>+</b><br>
+              <b>Kling 1.5 (Closed Product)</b>
+            </td>
+                
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><span style="color:red;">Harry Potter</span> suddenly emerges from under a sheet in a dark room, pretending to be asleep.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/GT_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/Kling1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><span style="color:red;">Aunt Petunia</span> greets her nephew <span style="color:red;">Dudley</span> in a warmly lit room, indicating a family gathering.               </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.19.266-00.02.23.584.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.02.19.266-00.02.23.584.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/aspose_video_133759514129050265_out.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><span style="color:red;">Ron Weasley</span> and <span style="color:red;">Hermione Granger</span> are looking for a place to sit on the train. They discover a compartment with a man asleep inside and decide to enter.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.19.18.511-00.19.20.830.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideoX_1054_Harry_Potter_and_the_prisoner_of_azkaban_00.19.18.511-00.19.20.830.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisonKlinger_of_azkaban_00.19.18.511-00.19.20.830.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b>The scene depicts horseless carriages moving through a dark, rainy night towards Hogwarts Castle. The mood is mysterious and ominous, with the carriages illuminated by faint lights.              </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.24.02.654-00.24.13.673.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.24.02.654-00.24.13.673.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/kling1054_Harry_Potter_and_the_prisoner_of_azkaban_00.24.02.654-00.24.13.673.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b>
+                <span style="color:red;">Hagrid</span>, the large giant, sits beside a long table, unintentionally bumping into it and attempting to stand up.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.25.47.203-00.25.50.895.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.25.47.203-00.25.50.895.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/Kling_1054_Harry_Potter_and_the_priser_of_azkaban_00.25.47.203-00.25.50.895_NoAudio.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><b>Professor <span style="color:red;">Sybil Trelawney</span> is teaching a class on divination, engaging students with her mystical and dramatic presentation style in a dimly lit, ornate classroom.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.29.17.213-00.29.20.784.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.29.17.213-00.29.20.784.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/Kling_1054_Harry_Potter_and_the_priser_of_azkaban_00.29.17.213-00.29.20.784.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b>In a forest setting, students gather around as <span style="color:red;">Harry Potter</span> steps forward while others, including <span style="color:red;">Ron Weasley</span> and <span style="color:red;">Hermione Granger</span>, step back. The scene conveys tension and anticipation.     </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.33.59.016-00.34.01.311.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.33.59.016-00.34.01.311.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/Kling_1054_Harry_Potter_and_the_priser_of_azkaban_00.33.59.016-00.34.01.311.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><span style="color:red;">Ron Weasley</span> steps forward reluctantly in a line of students, indicating an upcoming event or decision.               </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.43.02.156-00.43.03.964.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_00.43.02.156-00.43.03.964.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/Kling_1054_Harry_Potter_and_the_priser_of_azkaban_00.43.02.156-00.43.03.964_withAudio.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b><span style="color:red;">Harry Potter</span> is closely examining a crystal ball, possibly in a Divination class.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_01.19.20.335-01.19.25.237.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_01.19.20.335-01.19.25.237.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/kling1054_Harry_Potter_and_the_prisoner_of_azkaban_01.19.20.335-01.19.25.237.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b>The scene depicts a full moon emerging from behind clouds, creating a tense and eerie mood. The landscape is barely visible under the moonlight.              </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_01.39.21.947-01.39.24.253.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_01.39.21.947-01.39.24.253.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/kling_1054_Harry_Potter_and_the_prisoner_of_azkaban_01.39.21.947-01.39.24.253.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">
+              <b>In a dark forest, <span style="color:red;">Harry Potter</span> uses his wand to cast a spell, emitting a bright light that repels the Dementors, showcasing his bravery and magical prowess.</b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_02.01.20.605-02.01.35.380.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_02.01.20.605-02.01.35.380.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/kling_1054_Harry_Potter_and_the_prisoner_of_azkaban_02.01.20.605-02.01.35.380.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr>
+          <!-- <tr>
+            <td style="text-align:left;">
+              <b>The scene captures a breathtaking aerial view above Hogwarts, with <span style="color:red;">Harry</span> shouting in exhilaration as he flies over the landscape. </b>
+            </td>
+            
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_02.09.42.316-02.09.44.178.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/CogVideo1054_Harry_Potter_and_the_prisoner_of_azkaban_02.09.42.316-02.09.44.178.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+            <td>
+              <video src="./static/videos/1054_Harry_Potter_and_the_prisoner_of_azkaban_00.00.44.479-00.00.48.396.mp4" width="832" height="512" autoplay muted loop>
+              </video>
+            </td>
+          </tr> -->
+          
+          
+          
+          </table>
+        <!-- </div> -->
+    </div>
+  </div>
+</section>
+
+
+
+<!--  Talking Human with Audio Generation -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3"> Task 4: Audio-driven Talking Human Generation</h2>
+        <!-- <p>
+          The input conditions for the HMControlModule can be generated by a head model that has the <a href="https://arkit-face-blendshapes.com/" target="_blank">ARKit Face Blendshapes</a> bound to it. So we can use ARKit blendshape values to control the generation of facial expressions.
+        </p> -->
+        <img src="static/images/1004_Juno_00.10.20.997-00.10.28.000.png" 
+        alt="1004_Juno_00.10.20.997-00.10.28.000" 
+        style="width:450px; height:100px; float:left; margin-right:10px;" />
+        <video poster="" id="video_expedit" controls muted loop height="100%">
+          <source src="static/videos/1004_Juno_00.10.20.997-00.10.28.000.mp4"
+          type="video/mp4">
+        </video>
+        <p>
+        <strong>1) GT</strong>:The original video is sourced from the movie <strong>Juno</strong>, covering the time range 00:10:20.997 to 00:10:28.000.
+        <p>
+        </p>
+        <strong>2) Source Image Conditional</strong>:Using the initial frame of the original video along with audio as conditions for audio-driven talking human generation (Hallo2 was used for the demo).
+        <p>
+        </p>  
+        <strong>3) Text Conditional</strong>:Using generated images (StoryDiffusion) and audio (Hallo2) as conditions for audio-driven talking human generation.
+        </p>
+        <img src="static/images/1027_Les_Miserables.png" 
+        alt="1027_Les_Miserables" 
+        style="width:400px; height:100px; float:left; margin-right:10px;" />
+        <video poster="" id="video_expedit" controls muted loop height="100%">
+          <!-- Your video file here -->
+          <source src="static/videos/1027_Les_Miserables_01.48.22.566-01.48.31.745.mp4"
+          type="video/mp4">
+        </video>
+        <video poster="" id="video_expedit" controls muted loop height="100%">
+          <!-- Your video file here -->
+          <source src="static/videos/1027_Les_Miserables_00.13.08.141-00.13.24.689.mp4"
+          type="video/mp4">
+        </video>
+        <!-- <p>
+          <strong>1) GT</strong>:The original video is sourced from the movie <strong>Les Miserables</strong>, covering the time range 01:48:22:566 to 01:48:31:745 and 00:13:08:141 to 00:13:24:689.
+          <p>
+          </p>
+          <strong>2) Source Image Conditional</strong>:Using the initial frame of the original video along with audio as conditions for audio-driven talking human generation (<a href="https://arxiv.org/abs/2410.07718" target="_blank">Hallo2</a> was used for the demo).
+          <p>
+          </p>  
+          <strong>3) Text Conditional</strong>:Using generated images (<a href="https://arxiv.org/abs/2405.01434" target="_blank">StoryDiffusion</a>) and audio (<a href="https://arxiv.org/abs/2410.07718" target="_blank">Hallo2</a>) as conditions for audio-driven talking human generation.
+          </p> -->
+          <p>
+            <strong>1) GT</strong>:The original video is sourced from the movie <strong>Les Miserables</strong>, covering the time range 01:48:22:566 to 01:48:31:745 and 00:13:08:141 to 00:13:24:689.
+            <p>
+            </p>
+            <strong>2) Source Image Conditional</strong>:Using the initial frame of the original video along with audio as conditions for audio-driven talking human generation (Hallo2 was used for the demo).
+            <p>
+            </p>  
+            <strong>3) Text Conditional</strong>:Using generated images (StoryDiffusion) and audio (Hallo2) as conditions for audio-driven talking human generation.
+            </p>
+    </div>
+  </div>
+</section>
+<!-- End Exp Edit -->
+
+
+<!-- Challenges Module -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Challenges in Current Movie Generation Models: Bridging the Gap to True Long-Form Video Generation</h2>
+        <div class="content has-text-justified">
+          <!-- Your image here -->
+          <img src="static/images/Bad Case.png" alt="Bad Case"/>
+          <p class="content has-text-left">
+            MovieBench reconsiders and explores new challenges in long video generation, such as multi-object consistency and multi-view coherence.
+          </p>
+        </div>
+    </div>
+  </div>
+</section>
+<!-- End Motion Module -->
+
+
+
+<!-- BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{wu2025moviebench,
+      title={MovieBench: A Hierarchical Movie Level Dataset for Long Video Generation}, 
+      author={Weijia Wu and Mingyu Liu and Zeyu Zhu and Xi Xia and Haoen Feng and Wen Wang and  Kevin Qinghong Lin and Chunhua Shen, Mike Zheng Shou },
+      year={2024},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+}</code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+            <p>
+            If you have any copyright concerns regarding these materials, please contact us at (weijiawu96@gmail.com), and we will address the issue promptly.
+          </p>
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
